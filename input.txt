@@ -1,0 +1,12 @@
+var playerChance = true;
+var ground = [0,0,0,0,0,0,0,0,0];
+var winArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6], [0, 3, 6], [1, 4, 7], [2, 5, 8]];
+var angles = [0, 0, 0, 45, 45, 90, 90, 90];
+var startCordinates = [
+    {x: 50, y:50}, {x: 50, y:150}, {x: 50, y:250}, {x: 300, y:0}, {x: 0, y:0}, {x: 0, y:50}, {x: 150, y:50}, {x: 250, y:50}
+]
+var lengths = [
+    200, 200, 200, 300, 300, 200, 200, 200
+]
+$('.ground').append(`<div class='line' style="position:absolute;top:${startCordinates[winIndex].y}px;left:${startCordinates[winIndex].x}px;height:1px;color:yellow;width:${lengths[winIndex]}px"></div>`);   
+

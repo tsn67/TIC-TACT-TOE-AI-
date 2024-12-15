@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Langar&family=Lilita+One&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    --color1: #FCC737;
+    --color2: #E73879;
+    --color3: #F26B0F;
+    --color4: #7ED778;
+    --color5: #E0E0E0;
+    --color6: #D8E645;
+    text-shadow: -2px 0px 7px rgba(0,0,0,0.45);
+}
+
+body {
+    width: 100%;
+    background: var(--color2);
+}
+
+.header {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+.header > h1 {
+    margin-top: 20px;
+    font-size: 2.8rem;
+    font-family: "Lilita One", sans-serif;
+    color: var(--color1);
+}
+
+.content {
+    height: 500px;
+    font-family: "Lilita One", sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.score {
+    display: grid;
+    place-items: center;
+    align-content: center;
+}
+
+.score > h1  {
+    font-size: 3.4rem;
+    color: var(--color5);
+}
+
+.ground {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 308px;
+    height: 308px;
+    background: var(--color1);
+    grid-gap: 4px;
+    position: relative;
+}
+
+.ground > button {
+    width: 100px;
+    height: 100px;
+    background: var(--color2);
+    border: none;
+    font-family: "Langar", system-ui;
+    transition: 300ms ease-in;
+}
+
+.ground > button > h1 {
+    font-size: 2rem;
+    color: transparent;
+    color: var(--color1);
+}
+
+.temp1 {
+    animation: anim1 ease-in 300ms forwards;
+}
+
+@keyframes anim1 {
+    from {
+        scale: 1;
+    } to {
+        scale: 1.5;
+    }
+}
+
+
+
+.ground > button:hover {
+    background: var(--color3);
+}
+
+.middle {
+    display: grid;
+    place-items: center;
+    align-items: center;
+}
+
+.footer {
+    width: 100%;
+    font-family: "Lilita One", sans-serif;
+    font-size: 1.4rem;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    align-items: center;
+}
+
+.outer {
+    width: 400px;
+    height: 23px;
+    background: var(--color3);
+}
+
+.inner {
+    height: 100%;
+    width: 0%;
+    background: var(--color1);
+}
+
+.animation {
+    animation: loadAnimation 3s ease-in forwards;
+}
+
+@keyframes loadAnimation {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+
+@keyframes anim2 {
+    form {
+        scale: 1;
+    } to {
+        scale: 2;
+        transform: translateY(-100%);
+    }
+}
+
+.line {
+    position: absolute;
+    width: 200px;
+    height: 2px;
+    background: black;
+    opacity: 0;
+    transition: 400ms ease-in;
+}
+
+.line0 {
+    top: 50px;
+    left: 30px;
+    width: 240px;
+}
+
+.line1 {
+    top: 150px;
+    left: 30px;
+    width: 240px;
+}
+
+.line2 {
+    top: 250px;
+    left: 30px;
+    width: 240px;
+}
+
+.line4 {
+    top: 150px;
+    left: 10px;
+    width: 300px;
+    transform: rotateZ(-45deg);
+}
+
+.line3 {
+    top: 150px;
+    left: -4px;
+    width: 300px;
+    transform: rotateZ(45deg);
+}
+
+.line5 {
+    width: 2px;
+    left: 50px;
+    height: 240px;
+}
+
+.line6 {
+    width: 2px;
+    left: 150px;
+    height: 240px;
+}
+
+.line7 {
+    width: 1px;
+    left: 250px;
+    height: 240px;
+}
+
+/* for mobile devices */
+@media  screen and (max-width: 700px) {
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 2fr;        
+    }    
+
+    .score > h1{
+        font-size: 2rem;
+    }
+
+    .header > h1 {
+        font-size: 2rem;
+    }
+
+    .middle {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+
+    .footer > h1 {
+        font-size: 2.4rem;
+    }
+
+    .userwon {
+        color: var(--color4);
+        transition: ease-in 3000ms;
+        position: absolute;
+        top: 50vh;
+    }
+
+
+    .outer {
+        width: 70%;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}
