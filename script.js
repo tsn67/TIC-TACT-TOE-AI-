@@ -5,10 +5,7 @@ var ground = [0,0,0,0,0,0,0,0,0];
 var winArray = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 4, 8], [2, 4, 6], [0, 3, 6], [1, 4, 7], [2, 5, 8]];
 
 var inputButtons = $(".ground > button");
-
-
-
-
+var aiPlay = true;
 
 
 //inputButtons.text("O");
@@ -40,23 +37,27 @@ inputButtons.click(function() {
                 won(1);
                 return;
             }
-            let flag = 0;
-            for(let i = 0;i < ground.length;i++) {
-                if(ground[i] != 0) {
-                    flag++;
-                    break;
-                }
-            }
-            // flag = 0 draw
-            if(flag == 0) {
-                won(3);
-            }
+            
             computerMove();
             if(checkWin(2)) {
                 //console.log('computer won');
                 won(2);
+                return;
             }
             playerChance = true;
+
+            let flag1 = 0;
+            for(let i = 0;i < ground.length;i++) {
+                if(ground[i] == 0) {
+                    flag1++;
+                    break;
+                }
+            }
+            // flag = 0 draw
+            if(flag1 == 0) {
+                won(3);
+                return;
+            }
         }
         console.log(ground);
     } 
@@ -65,6 +66,7 @@ inputButtons.click(function() {
 
 // simple ai section
 function computerMove() {
+     if(!aiPlay) return;
      //computer's turn, changing turn to player as next
      //1 checking any winnable cell
      let input = checkWinnable(2);
@@ -150,25 +152,60 @@ function checkWinnable(player) {
     return -1;
 }
 
+//info window
+var infoElement = `<div class="infowindow">
+        <h1></h1>
+        <button>restart</button>
+    </div>`;
+
+
 var userScore = 0;
 var computerScore = 0;
 function won(player) {
-    $(`.line${winIndex}`).css('opacity', '1');
+    if(player != 3) {
+        $(`.line${winIndex}`).css('opacity', '1');
+    }
     if(player === 1) {
         userScore++;
-       $('.user > .score').text(`${userScore}`);   
+       $('.user > .score').text(`${userScore}`);
+       $('body').append(infoElement);  
+       var element = $('.infowindow');
+       element.children('h1').text('you won!');
+       element.addClass('anim3');
     } else if(player === 2) {
         playerChance = false;
         computerScore++;
         $('.computer > .score').text(`${computerScore}`);
+        $('body').append(infoElement);  
+        var element = $('.infowindow');
+        element.children('h1').text('computer won!');
+        element.addClass('anim3');
     } else {
         //draw
+        console.log('hi');
+        $('body').append(infoElement);  
+        var element = $('.infowindow');
+        element.children('h1').text('draw!');
+        element.addClass('anim3');
     }
     playerChance = false;
-    setTimeout(() => {
-        for(let i = 0;i < ground.length;i++) ground[i] = 0;
-        $('.ground > button').children('h1').text('');
-        playerChance = true;
-        $('.line').css('opacity', '0');
-    },3000);
+    aiPlay = false;
 }
+
+$('body').on('click', '.infowindow > button', function() {
+    console.log("check");
+    ground = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    $('.infowindow').remove(); // Correctly remove the entire element
+    inputButtons.children('h1').text('');;
+    playerChance = true;
+    inputButtons.children('h1').removeClass('temp1');
+    aiPlay = true;
+    $(`.line${winIndex}`).css('opacity', '0');
+});
+
+// function restart() {
+//     ground = [0,0,0,0,0,0,0,0,0];
+//     $('body').remove('.infowindow');
+//     inputButtons.text('');
+//     playerChance = true;
+// }
